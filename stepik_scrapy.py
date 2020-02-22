@@ -2,10 +2,8 @@ from scrapy import Selector
 
 
 def main():
-    with open('courses_list.html') as f:
-        html = f.read()
-
-    sel = Selector(text=html)
+    with open('courses_list.html', encoding='utf-8') as f:
+        sel = Selector(text=f.read())
 
     course_list = sel.xpath('//ol')
     print(course_list.extract())
