@@ -28,6 +28,9 @@ def main():
                 authors[t['href']] = t.text.strip()
             elif t.name == 'div' and 'course-promo-widget__stats-item' in t['class']:
                 course_students = t.text.strip()
+                if 'K' in course_students:
+                    course_students = course_students.strip('K')
+                    course_students = int(eval(course_students) * 1000)
         with open('stepik_courses.csv', 'a', newline='', encoding='utf-8') as csv_file:
             my_writer = csv.writer(csv_file)
             my_writer.writerow([course_id, course_title, course_link, authors, course_students])
